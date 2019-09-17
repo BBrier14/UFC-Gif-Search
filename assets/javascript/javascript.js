@@ -35,7 +35,7 @@ var fighters = ["McGregor", "Diaz", "Askren", "Jones"]
 
 //Create a function to render a button when a fighter is chosen
 function renderButtons() {
-    // $("#fighter-button").empty();
+    $("#fighter-button").empty();
 
     for (var i = 0; i < fighters.length; i++) {
         var a = $('<button>');
@@ -45,5 +45,13 @@ function renderButtons() {
         $("#fighter-button").append(a);
 
 }}
+
+$("#find-fighter").on("click", function(event){ 
+    event.preventDefault();
+
+    var fighter = $("#fighter-input").val().trim();
+    fighters.push(fighter);
+    renderButtons();
+})
 
 renderButtons();
