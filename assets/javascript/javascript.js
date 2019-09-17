@@ -20,7 +20,7 @@ $('#find-fighter').on("click", function(event) {
         var results = response.data;
         console.log(results);
 
-        for (var i = 0; i < results.length; i++){
+        for (var i = 0; i < 10; i++){
         console.log(results[i]);
             var fighterDiv = $('<div>');
             var p = $('<p>').text("Rating: " + results[i].rating);
@@ -62,3 +62,5 @@ $("#find-fighter").on("click", function(event){
 })
 
 renderButtons();
+
+//!!!!!look at excersise 9 for how to display info from a button!!!!!
