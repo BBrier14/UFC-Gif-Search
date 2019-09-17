@@ -2,36 +2,43 @@
 var apikey = "Gk7GE3hsWMc3uSKfYG0G6GF3VEn8rZIS"
 var fighters = ["McGregor", "Diaz", "Askren", "Jones"]
 //Create on-click event to find the value of the name the user entered and make an AJAX call
-// $('#find-fighter').on("click", function(event) {
-//     event.preventDefault();
-//     console.log("test");
+$('#find-fighter').on("click", function(event) {
+    event.preventDefault();
+    console.log("test");
 
-//     var fighter = $('#fighter-input').val();
-//     var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + fighter + "&api_key=" + apikey;
+    var fighter = $('#fighter-input').val();
+    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + fighter + "&api_key=" + apikey;
 
-//     $.ajax({
-//         url: queryurl,
-//         method: 'GET'
-//     })
-//     .then(function(response) {
-//         console.log(queryurl);
-//         console.log(response);
+    $.ajax({
+        url: queryurl,
+        method: 'GET'
+    })
+    .then(function(response) {
+        console.log(queryurl);
+        console.log(response);
 
-//         var results = response.data;
+        var results = response.data;
+        console.log(results);
 
-//         for (var i = 0; i < results.length; i++);
-//             var fighterDiv = $('<div>');
-//             var p = $('<p>').text("Rating: " + results[i].rating);
-//             var fighterImage = $('<img>');
-//             fighterImage.attr("src", results[i].images.fixed_height.url); 
-//             fighterDiv.append(p);
-//             fighterDiv.append(fighterImage);
-//             $('#fighter-view').append(fighterDiv);
+        for (var i = 0; i < results.length; i++){
+        console.log(results[i]);
+            var fighterDiv = $('<div>');
+            var p = $('<p>').text("Rating: " + results[i].rating);
+            var fighterImage = $('<img>');
+            fighterImage.attr("src", results[i].images.fixed_height.url); 
+            fighterDiv.append(p);
+            fighterDiv.append(fighterImage);
+            $('#fighter-view').append(fighterDiv);
+
+
 
            
-//     })
-//     renderButtons();
-// });
+    }})
+    .catch(function(error){
+        console.log(error);
+    })
+    renderButtons();
+});
 
 //Create a function to render a button when a fighter is chosen
 function renderButtons() {
