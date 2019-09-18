@@ -16,7 +16,6 @@ $('#find-fighter').on("click", function (event) {
     })
         .then(function (response) {
             var results = response.data;
-            console.log(response);
 
             for (var i = 0; i < 10; i++) {
                 var fighterDiv = $('<div>');
@@ -74,7 +73,6 @@ function displayFighterGif() {
         method: "GET"
     }).then(function (response) {
         var results = response.data;
-        console.log(response);
 
         for (var i = 0; i < 10; i++) {
             var fighterDiv = $('<div>');
