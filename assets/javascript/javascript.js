@@ -1,6 +1,7 @@
 //Create API Key variable to avoid typing the entire number
 var apikey = "Gk7GE3hsWMc3uSKfYG0G6GF3VEn8rZIS"
-var fighters = ["Conor McGregor", "Nate Diaz", "Ben Askren", "Jon Jones"]
+var fighters = ["Conor McGregor", "Nate Diaz", "Ben Askren", "Jon Jones", "Henry Cejudo", "Max Holloway", "Khabib Nurmagomedov", "Kamuru Usman",
+                "Robert Whittaker", "Stipe Miocic", "Zhang Weili"]
 
 //This On-Click event searches for the value of the name entered and creates a div with a gif and the rating and appends it to the html
 $('#find-fighter').on("click", function (event) {
@@ -95,11 +96,11 @@ $(document).on("click", ".fighter", displayFighterGif);
 
 
 //This on-click function will decide if the gif is still or animated and do the opposite upon a click
-$("#fighter-view").on("click", ".gif", function(event){
+$("#fighter-view").on("click", ".gif", function (event) {
     event.preventDefault();
 
     var state = $(this).attr("data-state");
-    if (state === "still"){
+    if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
     } else {
