@@ -66,3 +66,21 @@ label {
     text-decoration:none;
     font-family: 'Titillium Web', sans-serif;
 }
+
+p {
+    color: red;
+    background: #333333;
+    font-family: 'Titillium Web', sans-serif;
+    width: 95px;
+}
+
+.container, #fighter-button {
+    text-align: center;
+}
+
+#fighter-view {
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #333333;
+    width: 385px;
+}

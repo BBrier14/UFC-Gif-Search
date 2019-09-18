@@ -22,6 +22,7 @@ $('#find-fighter').on("click", function (event) {
                 var fighterDiv = $('<div>');
                 var p = $('<p>').text("Rating: " + results[i].rating);
                 var fighterImage = $('<img>');
+                var hr = $('<hr>')
 
                 fighterImage.attr("src", results[i].images.fixed_height_still.url);
                 fighterImage.attr("data-still", results[i].images.fixed_height_still.url);
@@ -30,6 +31,7 @@ $('#find-fighter').on("click", function (event) {
                 fighterImage.addClass("gif");
                 fighterDiv.append(fighterImage);
                 fighterDiv.append(p);
+                fighterDiv.append(hr);
                 $('#fighter-view').prepend(fighterDiv);
             }
         })
@@ -78,6 +80,7 @@ function displayFighterGif() {
             var fighterDiv = $('<div>');
             var p = $('<p>').text("Rating: " + results[i].rating);
             var fighterImage = $('<img>');
+            var hr = $('<hr>')
 
             fighterImage.attr("src", results[i].images.fixed_height_still.url);
             fighterImage.attr("data-still", results[i].images.fixed_height_still.url);
@@ -86,6 +89,7 @@ function displayFighterGif() {
             fighterImage.addClass("gif");
             fighterDiv.append(fighterImage);
             fighterDiv.append(p);
+            fighterDiv.append(hr);
             $('#fighter-view').prepend(fighterDiv);
         }
     })
