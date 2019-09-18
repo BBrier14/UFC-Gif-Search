@@ -43,7 +43,6 @@ function renderButtons() {
         a.attr("data-name", fighters[i]);
         a.text(fighters[i])
         $("#fighter-button").append(a);
-
     }
 }
 
@@ -76,8 +75,6 @@ function displayFighterGif() {
             fighterDiv.append(fighterImage);
             $('#fighter-view').prepend(fighterDiv);
         }
-
-
     })
 }
 
