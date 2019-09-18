@@ -1,10 +1,10 @@
 //Create API Key variable to avoid typing the entire number
 var apikey = "Gk7GE3hsWMc3uSKfYG0G6GF3VEn8rZIS"
-var fighters = ["McGregor", "Diaz", "Askren", "Jones"]
-//Create on-click event to find the value of the name the user entered and make an AJAX call
-$('#find-fighter').on("click", function(event) {
+var fighters = ["Conor McGregor", "Nate Diaz", "Ben Askren", "Jon Jones"]
+
+//This On-Click event searches for the value of the name entered and creates a div with a gif and the rating and appends it to the html
+$('#find-fighter').on("click", function (event) {
     event.preventDefault();
-    console.log("test");
 
     var fighter = $('#fighter-input').val();
     var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + fighter + "&api_key=" + apikey;
@@ -13,34 +13,27 @@ $('#find-fighter').on("click", function(event) {
         url: queryurl,
         method: 'GET'
     })
-    .then(function(response) {
-        console.log(queryurl);
-        console.log(response);
+        .then(function (response) {
+            var results = response.data;
 
-        var results = response.data;
-        console.log(results);
-
-        for (var i = 0; i < 10; i++){
-        console.log(results[i]);
-            var fighterDiv = $('<div>');
-            var p = $('<p>').text("Rating: " + results[i].rating);
-            var fighterImage = $('<img>');
-            fighterImage.attr("src", results[i].images.fixed_height.url); 
-            fighterDiv.append(p);
-            fighterDiv.append(fighterImage);
-            $('#fighter-view').append(fighterDiv);
-
-
-
-           
-    }})
-    .catch(function(error){
-        console.log(error);
-    })
+            for (var i = 0; i < 10; i++) {
+                var fighterDiv = $('<div>');
+                var p = $('<p>').text("Rating: " + results[i].rating);
+                var fighterImage = $('<img>');
+                fighterImage.attr("src", results[i].images.fixed_height.url);
+                fighterDiv.append(p);
+                fighterDiv.append(fighterImage);
+                $('#fighter-view').prepend(fighterDiv);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
     renderButtons();
 });
 
-//Create a function to render a button when a fighter is chosen
+
+//This Function creates a button with a class, attribute, text, and appends the button list
 function renderButtons() {
     $("#fighter-button").empty();
 
@@ -51,9 +44,11 @@ function renderButtons() {
         a.text(fighters[i])
         $("#fighter-button").append(a);
 
-}}
+    }
+}
 
-$("#find-fighter").on("click", function(event){ 
+//This On-Click Event takes the value of the name and pushes it into the fighter array, which is later made into a button
+$("#find-fighter").on("click", function (event) {
     event.preventDefault();
 
     var fighter = $("#fighter-input").val().trim();
@@ -61,6 +56,37 @@ $("#find-fighter").on("click", function(event){
     renderButtons();
 })
 
-renderButtons();
+// //This Function will find the value of whatever button is clicked and display ten gifs
+function displayFighterGif() {
+    var chosenFighter = $(this).attr("data-name");
+    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + chosenFighter + "&api_key=" + apikey;
 
-//!!!!!look at excersise 9 for how to display info from a button!!!!!
+    $.ajax({
+        url: queryurl,
+        method: "GET"
+    }).then(function (response) {
+        var results = response.data;
+
+        for (var i = 0; i < 10; i++) {
+            var fighterDiv = $('<div>');
+            var p = $('<p>').text("Rating: " + results[i].rating);
+            var fighterImage = $('<img>');
+            fighterImage.attr("src", results[i].images.fixed_height.url);
+            fighterDiv.append(p);
+            fighterDiv.append(fighterImage);
+            $('#fighter-view').prepend(fighterDiv);
+        }
+
+
+    })
+}
+
+// //Create a function to show fighter gifs when button is clicked
+$(document).on("click", ".fighter", displayFighterGif);
+
+
+
+//Render fighter buttons upon opening of page
+renderButtons()
+
+
