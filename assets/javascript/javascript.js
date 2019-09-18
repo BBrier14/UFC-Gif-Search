@@ -15,12 +15,18 @@ $('#find-fighter').on("click", function (event) {
     })
         .then(function (response) {
             var results = response.data;
+            console.log(response);
 
             for (var i = 0; i < 10; i++) {
                 var fighterDiv = $('<div>');
                 var p = $('<p>').text("Rating: " + results[i].rating);
                 var fighterImage = $('<img>');
-                fighterImage.attr("src", results[i].images.fixed_height.url);
+
+                fighterImage.attr("src", results[i].images.fixed_height_still.url);
+                fighterImage.attr("data-still", results[i].images.fixed_height_still.url);
+                fighterImage.attr("data-animate", results[i].images.fixed_height.url);
+                fighterImage.attr("data-state", "still");
+                fighterImage.addClass("gif");
                 fighterDiv.append(p);
                 fighterDiv.append(fighterImage);
                 $('#fighter-view').prepend(fighterDiv);
@@ -65,12 +71,18 @@ function displayFighterGif() {
         method: "GET"
     }).then(function (response) {
         var results = response.data;
+        console.log(response);
 
         for (var i = 0; i < 10; i++) {
             var fighterDiv = $('<div>');
             var p = $('<p>').text("Rating: " + results[i].rating);
             var fighterImage = $('<img>');
-            fighterImage.attr("src", results[i].images.fixed_height.url);
+
+            fighterImage.attr("src", results[i].images.fixed_height_still.url);
+            fighterImage.attr("data-still", results[i].images.fixed_height_still.url);
+            fighterImage.attr("data-animate", results[i].images.fixed_height.url);
+            fighterImage.attr("data-state", "still");
+            fighterImage.addClass("gif");
             fighterDiv.append(p);
             fighterDiv.append(fighterImage);
             $('#fighter-view').prepend(fighterDiv);
@@ -78,9 +90,23 @@ function displayFighterGif() {
     })
 }
 
-// //Create a function to show fighter gifs when button is clicked
+//Create a function to show fighter gifs when button is clicked
 $(document).on("click", ".fighter", displayFighterGif);
 
+
+//This on-click function will decide if the gif is still or animated and do the opposite upon a click
+$("#fighter-view").on("click", ".gif", function(event){
+    event.preventDefault();
+
+    var state = $(this).attr("data-state");
+    if (state === "still"){
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+})
 
 
 //Render fighter buttons upon opening of page
